@@ -24,11 +24,28 @@ export const Dashboard = () => {
     fetchTransactions();
   }, []);
 
-  console.log("Provider data is", providerData);
-
   if (error) return <div>{error}</div>;
 
   return (
+    <>
       <h2>Dashboard list goes here</h2>
+
+      {
+        providerData ? <ul>
+          {/* @ts-ignore */}
+          {providerData?.transactions.map(({id, amount, date, description}) => {
+            const {value, currency_iso} = amount;
+
+            return (
+              <li key={id}>
+                <div>Transaction date is {date}</div>
+                <div>Description is {description}</div>
+                <div>Amount is {value.toString()} {currency_iso}</div>
+              </li>
+            )
+          })}
+        </ul> : null
+      }
+  </>
   )
 }
