@@ -1,3 +1,6 @@
 import React from 'react';
+import { Dashboard } from './containers/Dashboard/Dashboard';
 
-export const App = () => <h1>Add transaction dashboard here</h1>;
+export const App = () => (
+    <Dashboard />
+);
