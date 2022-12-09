@@ -1,4 +1,8 @@
-export type CurrencyCodeIso = "GBP" | "USD";
+export const CURRENCY_SYMBOL = {
+  "GBP": "£"
+} as const;
+
+export type CurrencyCodeIso = keyof typeof CURRENCY_SYMBOL;
 
 interface TransactionAmount {
   value: number;
