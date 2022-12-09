@@ -12,7 +12,7 @@ export const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { transactions } = providerData || {};
+  const { balance, provider, transactions } = providerData || {};
 
   useEffect(() => {
     fetchProvider({
@@ -31,7 +31,22 @@ export const Dashboard = () => {
 
   return (
     <>
-      <h1>My Account</h1>
+      <h1>My {providerData?.provider.title} Account</h1>
+
+      <dl>
+        <div>
+          <dt>Sort Code:</dt>
+          <dd>{provider?.sort_code}</dd>
+        </div>
+        <div>
+          <dt>Account Number:</dt>
+          <dd>{provider?.account_number}</dd>  
+        </div>
+        <div>
+          <dt>Current Balance:</dt>
+          <dd>{balance?.amount} {balance?.currency_iso}</dd>
+        </div>
+      </dl>
 
       <h2>Expenses</h2>
       <TransactionsTable transactions={filteredTransactions} />

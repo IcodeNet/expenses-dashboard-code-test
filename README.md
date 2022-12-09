@@ -67,16 +67,24 @@ Good luck!
 
 ## Overview of requirements
 
-* ✅ React SPA with bundling from scratch
-* Data fetching
-  * ✅ Use provided endpoint; http://www.mocky.io/v2/5c62e7c33000004a00019b05
-  * ✅ Native fetching API's only
-  * ✅ Filter to **10 smallest transactions**
-* Display CSS skills; no frameworks/libraries. Styled components preferred.
-* Emphasis on performance. Optimise re-renders.
-* Accessibility is key
-* Keep it simple
-* Bonus
-  * Unit tests
-  * StyledComponents
-  * Loading & error states
+- [x] React SPA with bundling from scratch
+- [x] Data fetching
+  - [x] Use provided endpoint; http://www.mocky.io/v2/5c62e7c33000004a00019b05
+  - [x] Native fetching API's only
+  - [x] Filter to **10 smallest transactions**
+- [ ] Display CSS skills; no frameworks/libraries. Styled components preferred.
+- [ ] Emphasis on performance. Optimise re-renders.
+- [ ] Accessibility is key
+- [ ] Keep it simple
+- [ ] Bonus
+  - [ ] Unit tests
+  - [ ] StyledComponents
+  - [ ] Loading & error states
+
+## TODO
+
+- [ ] Complete UI styling
+- [ ] Date & currency formatting
+- [ ] Provider info UI elements
+- [ ] ?? User-selectable filters ??
+- [ ] Linting & formatting
