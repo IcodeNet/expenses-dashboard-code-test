@@ -19,7 +19,7 @@ export const filterExpenses = (
       return currAmount - prevAmount;
     });
 
-    return sorted.slice(0, filterLimit - 1);
+    return sorted.slice(0, filterLimit);
   }
 
   return [];

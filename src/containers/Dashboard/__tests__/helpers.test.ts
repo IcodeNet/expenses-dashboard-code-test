@@ -8,25 +8,28 @@ const DEFAULT_FILTER_SIZE = 10;
 describe("Dashboard helper functions", () => {
   describe("filterExpenses", () => {
     it("filters out income and defaults to 10 results", () => {
-      console.log("Filtered are", filterExpenses(transactions));
-      console.log("Expected are", SORTED_EXPENSES.slice(0, DEFAULT_FILTER_SIZE - 1));
+      const output = filterExpenses(transactions);
 
-      expect(filterExpenses(transactions)).toStrictEqual(
-        SORTED_EXPENSES.slice(0, DEFAULT_FILTER_SIZE - 1)
+      expect(output).toHaveLength(10);
+      expect(output).toStrictEqual(
+        SORTED_EXPENSES.slice(0, DEFAULT_FILTER_SIZE)
       );
     })
 
     it.each([
       {
         filterCount: 5, 
-        expected: SORTED_EXPENSES.slice(0, 4)
+        expected: SORTED_EXPENSES.slice(0, 5)
       },
       {
         filterCount: 15, 
-        expected: SORTED_EXPENSES.slice(0, 14)
+        expected: SORTED_EXPENSES.slice(0, 15)
     },
     ])("filters out income and returns $filterCount results", ({ filterCount, expected }) => {
-      expect(filterExpenses(transactions, filterCount)).toStrictEqual(expected)
+      const output = filterExpenses(transactions, filterCount);
+
+      expect(output).toHaveLength(filterCount);
+      expect(output).toStrictEqual(expected)
     });
   })
 });
