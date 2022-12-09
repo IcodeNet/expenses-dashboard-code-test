@@ -7,22 +7,23 @@ module.exports = {
   devServer: {
     static: './public',
     hot: true,
+    open: true
   },
   module: {
     rules: [
       {
         test: /\.(tsx|ts|js)?$/,
         use: 'ts-loader',
-        exclude: /.yarn/,
+        exclude: /.yarn/
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js']
   },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'public')
   },
   plugins: [
     new HtmlWebpackPlugin({
