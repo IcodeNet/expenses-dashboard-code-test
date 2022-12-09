@@ -5,9 +5,12 @@ module.exports = {
   entry: './src/index',
   devtool: 'inline-source-map',
   devServer: {
-    static: './public',
     hot: true,
-    open: true
+    open: true,
+    static: './public',
+    client: {
+      overlay: false
+    }
   },
   module: {
     rules: [

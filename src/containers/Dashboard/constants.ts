@@ -1,0 +1,1 @@
+export const DEFAULT_FILTER_COUNT = 10;

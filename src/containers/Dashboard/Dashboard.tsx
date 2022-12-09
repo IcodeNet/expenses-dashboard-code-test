@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react'
+// @ts-nocheck
+import React, { useEffect, useMemo, useState } from 'react'
+import { fetchTransactions } from '../../api/transactions';
+import { DEFAULT_FILTER_COUNT } from './constants';
+import { filterExpenses } from './helpers';
 
 export const Dashboard = () => {
-  const [providerData, setProviderData] = useState(null);
+  const [transactions, setTransactions] = useState<null | {}>(null);
+  const [filterCount, setFilterCount] = useState(DEFAULT_FILTER_COUNT);
+  
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const fetchTransactions = async () => {
-    try {
-      const data = await fetch("https://www.mocky.io/v2/5c62e7c33000004a00019b05");
-
-      if (data.ok) {
-        const parsed = await data.json();
-
-        setProviderData(parsed);
-      } else {
-        setError("You're transactions are unavailable right now. Please try again later.");    
-      }
-    } catch (e) {
-      setError("We were unable to fetch your transactions. Please try again later.");
-    }
-  }
-
   useEffect(() => {
-    fetchTransactions();
+    fetchTransactions({
+      setTransactions,
+      setIsLoading,
+      setError
+    });
   }, []);
 
+  const filteredTransactions = useMemo(() => filterExpenses(transactions, filterCount), [transactions, filterCount]);
+
+  console.log("Filtered transactions", filteredTransactions);
+
+  if (isLoading) return <div>Your transactions are loading</div>;
   if (error) return <div>{error}</div>;
 
   return (
@@ -31,9 +31,9 @@ export const Dashboard = () => {
       <h2>Dashboard list goes here</h2>
 
       {
-        providerData ? <ul>
-          {/* @ts-ignore */}
-          {providerData?.transactions.map(({id, amount, date, description}) => {
+        filteredTransactions ? <ul>
+          {filteredTransactions.map((transaction) => {
+            const {id, amount, date, description} = transaction;
             const {value, currency_iso} = amount;
 
             return (
@@ -46,6 +46,6 @@ export const Dashboard = () => {
           })}
         </ul> : null
       }
-  </>
-  )
+    </>
+  );
 }
