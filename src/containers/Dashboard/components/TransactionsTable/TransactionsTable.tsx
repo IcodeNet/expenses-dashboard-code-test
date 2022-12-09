@@ -1,4 +1,4 @@
-import type { Transaction } from '../../../api/types/transactions';
+import type { Transaction } from '../../../../api/types/transactions';
 import React, { type FC } from 'react'
 import { 
   Table, 
@@ -6,9 +6,10 @@ import {
   TableBodyCell, 
   TableHead, 
   TableHeadCell, 
-  TableRow 
-} from '../../../components/Table/Table.styles';
-import { SkeletonRow } from '../../../components/Table/SkeletonRow';
+  TableRow,
+  SkeletonRow
+} from '../../../../components';
+import { CURRENCY_SYMBOL } from '../../../../api/types/transactions';
 
 interface TransactionsTableProps {
   isLoading?: boolean;
@@ -39,12 +40,13 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
         {!isLoading && transactions.map((transaction) => {
           const {id, amount, date, description} = transaction;
           const {value, currency_iso} = amount;
+          const formattedDate = new Date(date).toLocaleDateString("en-GB");
 
           return (
           <TableRow key={id}>
-            <TableBodyCell>{date}</TableBodyCell>
+            <TableBodyCell>{formattedDate}</TableBodyCell>
             <TableBodyCell>{description}</TableBodyCell>
-            <TableBodyCell>{value.toString()} {currency_iso}</TableBodyCell>
+            <TableBodyCell>{CURRENCY_SYMBOL[currency_iso]} {Math.abs(value).toString()}</TableBodyCell>
           </TableRow>
           )
         })}

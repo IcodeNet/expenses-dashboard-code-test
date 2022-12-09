@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { COLORS } from "../../styles/primitives";
 
-const TABLE_BORDER_COLOR = "rgba(0, 0, 0, 0.12)";
+const TABLE_BORDER_COLOR = COLORS.grey.light;
 
 export const TableHead = styled.thead``;
 export const TableBody = styled.tbody``;
@@ -29,6 +30,7 @@ export const Table = styled.table`
   border: 1px solid ${TABLE_BORDER_COLOR};
   border-radius: 0.25rem;
   border-spacing: unset;
+  background-color: #ffffff;
   font-size: 0.875rem;
   text-align: left;
 
