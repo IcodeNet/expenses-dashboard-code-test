@@ -1,4 +1,5 @@
 import React from 'react'
+import { SkeletonRectangle } from '../../components/Skeleton/Skeleton.styles';
 import { TableBodyCell, TableRow } from './Table.styles'
 
 interface SkeletonRowProps {
@@ -9,9 +10,11 @@ export const SkeletonRow = ({ columns }: SkeletonRowProps) => {
   return (
     <TableRow>
       {
-        [...Array(columns)].map(
-          (_, index) => <TableBodyCell key={index}>Skeleton loader here</TableBodyCell>
-        )
+        [...Array(columns)].map((_, index) => (
+          <TableBodyCell key={index}>
+            <SkeletonRectangle />
+          </TableBodyCell>
+        ))
       }
     </TableRow>
   )
