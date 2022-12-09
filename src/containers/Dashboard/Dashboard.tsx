@@ -26,7 +26,6 @@ export const Dashboard = () => {
     () => filterExpenses(transactions || [], filterCount), [transactions, filterCount]
   );
 
-  if (isLoading) return <div>Your transactions are loading</div>;
   if (error) return <div>{error}</div>;
 
   return (
@@ -49,7 +48,10 @@ export const Dashboard = () => {
       </dl>
 
       <h2>Expenses</h2>
-      <TransactionsTable transactions={filteredTransactions} />
+      <TransactionsTable {...{
+        isLoading,
+        transactions: filteredTransactions
+      }} />
     </>
   );
 }
