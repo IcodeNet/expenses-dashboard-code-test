@@ -1,51 +1,40 @@
-// @ts-nocheck
 import React, { useEffect, useMemo, useState } from 'react'
-import { fetchTransactions } from '../../api/transactions';
+import { fetchProvider } from '../../api/fetchProvider';
 import { DEFAULT_FILTER_COUNT } from './constants';
 import { filterExpenses } from './helpers';
+import { TransactionsTable } from './components/TransactionsTable';
+import type { ProviderDataResponse } from '../../api/types/transactions';
 
 export const Dashboard = () => {
-  const [transactions, setTransactions] = useState<null | {}>(null);
+  const [providerData, setProviderData] = useState<ProviderDataResponse | null>(null);
   const [filterCount, setFilterCount] = useState(DEFAULT_FILTER_COUNT);
   
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const { transactions } = providerData || {};
+
   useEffect(() => {
-    fetchTransactions({
-      setTransactions,
+    fetchProvider({
+      setProviderData,
       setIsLoading,
       setError
     });
   }, []);
 
-  const filteredTransactions = useMemo(() => filterExpenses(transactions, filterCount), [transactions, filterCount]);
-
-  console.log("Filtered transactions", filteredTransactions);
+  const filteredTransactions = useMemo(
+    () => filterExpenses(transactions || [], filterCount), [transactions, filterCount]
+  );
 
   if (isLoading) return <div>Your transactions are loading</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <>
-      <h2>Dashboard list goes here</h2>
+      <h1>My Account</h1>
 
-      {
-        filteredTransactions ? <ul>
-          {filteredTransactions.map((transaction) => {
-            const {id, amount, date, description} = transaction;
-            const {value, currency_iso} = amount;
-
-            return (
-              <li key={id}>
-                <div>Transaction date is {date}</div>
-                <div>Description is {description}</div>
-                <div>Amount is {value.toString()} {currency_iso}</div>
-              </li>
-            )
-          })}
-        </ul> : null
-      }
+      <h2>Expenses</h2>
+      <TransactionsTable transactions={filteredTransactions} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { filterExpenses } from "../helpers";
 import { SORTED_EXPENSES } from "./data";
-import { MOCK_PROVIDER_DATA } from "./mockResponse";
+import { MOCK_PROVIDER_DATA } from "./data";
 
 const { transactions } = MOCK_PROVIDER_DATA;
 const DEFAULT_FILTER_SIZE = 10;

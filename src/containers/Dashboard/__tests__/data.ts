@@ -1,4 +1,6 @@
-export const SORTED_EXPENSES = [
+import { ProviderDataResponse, Transaction } from "../../../api/types/transactions"
+
+export const SORTED_EXPENSES: Transaction[] = [
   {
     "id": "a483bdde46390271ff377949455817a71d3cdf11a3492b2c921477b751265ee9aba4",
     "date": "2018-07-05",
@@ -191,7 +193,7 @@ export const SORTED_EXPENSES = [
   }
 ]
 
-export const MOCK_PROVIDER_DATA = {
+export const MOCK_PROVIDER_DATA: ProviderDataResponse = {
   "id": "0eb7acfd6fa3449676947c9521311cfce618bf9129ac5ac07ba30c76843e0f65fddb",
   "provider": {
     "title": "Monzo",

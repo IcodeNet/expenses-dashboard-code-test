@@ -1,17 +1,13 @@
+import type { Transaction } from "../../api/types/transactions";
 import { DEFAULT_FILTER_COUNT } from "./constants";
 
 export const filterExpenses = (
-  transactions: Record<string, any>[],
+  transactions: Transaction[],
   filterLimit: number = DEFAULT_FILTER_COUNT
-) => {
+): Transaction[] => {
   if (transactions?.length) {
-    const expenses = transactions.reduce((acc, curr) => {
-      if (curr.amount.value < 0) acc.push(curr);
+    const expenses = transactions.filter((transaction) => transaction.amount.value < 0);
 
-      return acc;
-    }, []);
-
-    // @ts-ignore
     const sorted = expenses.sort((prev, curr) => {
       const prevAmount = prev.amount.value;
       const currAmount = curr.amount.value;
