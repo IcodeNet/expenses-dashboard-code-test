@@ -72,13 +72,13 @@ Good luck!
   - [x] Use provided endpoint; http://www.mocky.io/v2/5c62e7c33000004a00019b05
   - [x] Native fetching API's only
   - [x] Filter to **10 smallest transactions**
-- [ ] Display CSS skills; no frameworks/libraries. Styled components preferred.
+- [x] Display CSS skills; no frameworks/libraries. Styled components preferred.
 - [ ] Emphasis on performance. Optimise re-renders.
 - [ ] Accessibility is key
-- [ ] Keep it simple
+- [x] Keep it simple
 - [ ] Bonus
-  - [ ] Unit tests
-  - [ ] StyledComponents
+  - [x] Unit tests
+  - [x] StyledComponents
   - [ ] Loading & error states
 
 ## TODO

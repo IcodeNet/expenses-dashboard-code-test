@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "../../../../styles/primitives";
+import { COLORS } from "../../../../styles";
 
 const { grey, white } = COLORS;
 

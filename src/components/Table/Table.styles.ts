@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { COLORS } from "../../styles/primitives";
+import { COLORS, getGridBreakpointMin } from "../../styles";
 
 const TABLE_BORDER_COLOR = COLORS.grey.light;
 
@@ -24,7 +24,7 @@ export const TableHeadCell = styled.th<TableHeadCellProps>`
   font-weight: 600;
   ${cellStyles}
 
-  @media screen and (min-width: 500.01px) {
+  @media screen and (${getGridBreakpointMin("sm")}) {
     width: ${({width}) => width || "auto"};
   }
 `;
