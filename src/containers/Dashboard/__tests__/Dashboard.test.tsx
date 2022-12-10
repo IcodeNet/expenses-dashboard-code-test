@@ -13,13 +13,17 @@ describe("Transactions dashboard", () => {
 
     render(<Dashboard />);
 
-    expect(screen.getByText(/your transactions are loading/i)).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: /date/i })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: /description/i })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: /amount/i })).toBeInTheDocument();
+
+    expect(screen.getAllByTestId("skeleton-loader")).toHaveLength(9);
 
     await waitFor(() => {
       expect(apiCallSpy).toHaveBeenCalledTimes(1);
     });
 
-    expect(screen.queryByText(/your transactions are loading/i)).not.toBeInTheDocument();
+    expect(screen.queryByTestId("skeleton-loader")).not.toBeInTheDocument();
   });
 
   it("should display sorted expenses list when fetched", async () => {
@@ -34,24 +38,24 @@ describe("Transactions dashboard", () => {
       expect(apiCallSpy).toHaveBeenCalledTimes(1);
     });
 
-    const transactions = screen.getAllByRole("listitem");
+    const transactions = screen.getAllByRole("row");
 
-    expect(transactions).toHaveLength(3);
+    expect(transactions).toHaveLength(4);
 
-    const firstTransaction = transactions[0];
-    const secondTransaction = transactions[1];
-    const thirdTransaction = transactions[2];
+    const firstTransaction = transactions[1];
+    const secondTransaction = transactions[2];
+    const thirdTransaction = transactions[3];
 
-    expect(within(firstTransaction).getByText(/transaction date is 2018-07-05/i)).toBeInTheDocument();
-    expect(within(firstTransaction).getByText(/description is transport for london/i)).toBeInTheDocument();
-    expect(within(firstTransaction).getByText(/amount is -2.85 gbp/i)).toBeInTheDocument();
+    expect(within(firstTransaction).getByText(/05\/07\/2018/i)).toBeInTheDocument();
+    expect(within(firstTransaction).getByText(/transport for london/i)).toBeInTheDocument();
+    expect(within(firstTransaction).getByText(/£2.85/i)).toBeInTheDocument();
 
-    expect(within(secondTransaction).getByText(/transaction date is 2018-06-30/i)).toBeInTheDocument();
-    expect(within(secondTransaction).getByText(/description is tesco/i)).toBeInTheDocument();
-    expect(within(secondTransaction).getByText(/amount is -57.21 gbp/i)).toBeInTheDocument();
+    expect(within(secondTransaction).getByText(/30\/06\/2018/i)).toBeInTheDocument();
+    expect(within(secondTransaction).getByText(/tesco/i)).toBeInTheDocument();
+    expect(within(secondTransaction).getByText(/£57.21/i)).toBeInTheDocument();
 
-    expect(within(thirdTransaction).getByText(/transaction date is 2018-07-03/i)).toBeInTheDocument();
-    expect(within(thirdTransaction).getByText(/description is amazon/i)).toBeInTheDocument();
-    expect(within(thirdTransaction).getByText(/amount is -99.95 gbp/i)).toBeInTheDocument();
+    expect(within(thirdTransaction).getByText(/03\/07\/2018/i)).toBeInTheDocument();
+    expect(within(thirdTransaction).getByText(/amazon/i)).toBeInTheDocument();
+    expect(within(thirdTransaction).getByText(/£99.95/i)).toBeInTheDocument();
   });
 });

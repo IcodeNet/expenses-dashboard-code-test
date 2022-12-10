@@ -12,7 +12,7 @@ export const SkeletonRow = ({ columns }: SkeletonRowProps) => {
       {
         [...Array(columns)].map((_, index) => (
           <TableBodyCell key={index}>
-            <SkeletonRectangle />
+            <SkeletonRectangle aria-label="Loading content" data-testid="skeleton-loader" />
           </TableBodyCell>
         ))
       }

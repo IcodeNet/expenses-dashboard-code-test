@@ -37,7 +37,8 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
 
     <TableBody>
       {isLoading && (
-        [...Array(skeletonRows)].map((_, index) => <SkeletonRow key={index} columns={3} />)
+        [...Array(skeletonRows)].map((_, index) => 
+          <SkeletonRow key={index} columns={3} />)
       )}
       
       {!isLoading && transactions.map((transaction) => {
