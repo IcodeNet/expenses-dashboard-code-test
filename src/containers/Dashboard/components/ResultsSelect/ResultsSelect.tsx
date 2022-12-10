@@ -4,6 +4,7 @@ import { ResultSelectWrapper, Select } from './ResultsSelect.styles';
 
 interface ResultsSelectProps {
     onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+    selectedValue: number;
 }
 
 const { 
@@ -12,12 +13,14 @@ const {
   options: resultsOptions 
 } = RESULTS_SELECT_CONTENT;
 
-export const ResultsSelect: FC<ResultsSelectProps> = memo(({ onChange }) => (
+export const ResultsSelect: FC<ResultsSelectProps> = memo(({ onChange, selectedValue }) => (
   <ResultSelectWrapper>
     <label htmlFor={resultsName}>{resultsLabel}</label>
-    <Select {...{ id: resultsName, name: resultsName, onChange }}>
-      {resultsOptions.map(({ value, label }) => 
-        <option key={value} value={label}>{label}</option>)}
+    <Select {...{ id: resultsName, name: resultsName, onChange, value: selectedValue }}>
+      {resultsOptions.map(({ value, label }) => {
+        const isSelected = value === selectedValue;
+        return <option key={value} value={label}>{label}</option>;
+      })}
     </Select>
   </ResultSelectWrapper>
 ));

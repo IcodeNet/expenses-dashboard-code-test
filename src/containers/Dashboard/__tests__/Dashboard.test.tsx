@@ -1,12 +1,13 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { mockSuccessfulGetRequest } from "../../../test-utils/msw/requestMockHelpers";
 import { Dashboard } from "../Dashboard";
-import { MOCK_PROVIDER_DATA } from "./data";
+import { MOCK_PROVIDER_DATA, MOCK_PROVIDER_DATA_CONDENSED } from "./data";
 import { server } from "../../../test-utils/msw/mswSetup";
 
 describe("Transactions dashboard", () => {
   it("should display loading text when transactions are fetched", async () => {
-    mockSuccessfulGetRequest("*/v2/5c62e7c33000004a00019b05", MOCK_PROVIDER_DATA)
+    mockSuccessfulGetRequest("*/v2/5c62e7c33000004a00019b05", MOCK_PROVIDER_DATA_CONDENSED)
 
     const apiCallSpy = jest.fn();
     server.events.on("request:start", apiCallSpy);
@@ -27,7 +28,7 @@ describe("Transactions dashboard", () => {
   });
 
   it("should display sorted expenses list when fetched", async () => {
-    mockSuccessfulGetRequest("*/v2/5c62e7c33000004a00019b05", MOCK_PROVIDER_DATA)
+    mockSuccessfulGetRequest("*/v2/5c62e7c33000004a00019b05", MOCK_PROVIDER_DATA_CONDENSED)
 
     const apiCallSpy = jest.fn();
     server.events.on("request:start", apiCallSpy);
@@ -57,5 +58,35 @@ describe("Transactions dashboard", () => {
     expect(within(thirdTransaction).getByText(/03\/07\/2018/i)).toBeInTheDocument();
     expect(within(thirdTransaction).getByText(/amazon/i)).toBeInTheDocument();
     expect(within(thirdTransaction).getByText(/£99.95/i)).toBeInTheDocument();
+  });
+
+  it("contains toggle which allows number of results per page to be selected", async () => {
+    mockSuccessfulGetRequest("*/v2/5c62e7c33000004a00019b05", MOCK_PROVIDER_DATA)
+
+    const apiCallSpy = jest.fn();
+    server.events.on("request:start", apiCallSpy);
+
+    render(<Dashboard />);
+
+    await waitFor(() => {
+      expect(apiCallSpy).toHaveBeenCalledTimes(1);
+    });
+
+    expect(screen.getAllByRole("row")).toHaveLength(11);
+
+    const resultsSelect = screen.getByRole("combobox", { name: /no. of results/i });
+
+    expect(resultsSelect).toBeInTheDocument();
+
+    userEvent.click(resultsSelect);
+
+    expect(screen.getAllByRole("option")).toHaveLength(3);
+
+    const option = screen.getByRole("option", { name: /15/i });
+    
+    expect(option).toBeInTheDocument();
+    userEvent.click(option);
+
+    await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(16));
   });
 });

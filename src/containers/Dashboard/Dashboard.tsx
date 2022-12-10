@@ -64,7 +64,7 @@ export const Dashboard = () => {
           transactions: filteredTransactions
         }} />
 
-        <ResultsSelect onChange={handleResultsCount} />
+        <ResultsSelect onChange={handleResultsCount} selectedValue={filterCount} />
       </TableWrapper>
     </Container>
   );
