@@ -263,6 +263,16 @@ export const MOCK_PROVIDER_DATA: ProviderDataResponse = {
   },
   "transactions": [
     {
+      "id": "13acb877dc4d8030c5dacbde33d3496a2ae3asdc000db4c793bda9c3228baca1a27",
+      "date": "2018-06-29",
+      "description": "Tesco",
+      "category_title": "Groceries",
+      "amount": {
+        "value": -211.45,
+        "currency_iso": "GBP"
+      }
+    },
+    {
       "id": "13acb877dc4d8030c5dacbde33d3496a2ae3asdc000db4c793bda9c3228baca1a28",
       "date": "2018-06-30",
       "description": "Tesco",

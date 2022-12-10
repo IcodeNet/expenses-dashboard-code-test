@@ -60,7 +60,19 @@ describe("Transactions dashboard", () => {
     expect(within(thirdTransaction).getByText(/£99.95/i)).toBeInTheDocument();
   });
 
-  it("contains toggle which allows number of results per page to be selected", async () => {
+  it.each([
+    {
+      given: "15",
+      expected: 16
+    },
+    {
+      given: "20",
+      expected: 21
+    }
+  ])("contains toggle which allows number of results per page to be selected", async ({
+    given,
+    expected 
+  }) => {
     mockSuccessfulGetRequest("*/v2/5c62e7c33000004a00019b05", MOCK_PROVIDER_DATA)
 
     const apiCallSpy = jest.fn();
@@ -82,11 +94,11 @@ describe("Transactions dashboard", () => {
 
     expect(screen.getAllByRole("option")).toHaveLength(3);
 
-    const option = screen.getByRole("option", { name: /15/i });
+    const option = screen.getByRole("option", { name: new RegExp(given) });
     
     expect(option).toBeInTheDocument();
-    userEvent.click(option);
+    userEvent.selectOptions(resultsSelect, option);
 
-    await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(16));
+    await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(expected));
   });
 });
