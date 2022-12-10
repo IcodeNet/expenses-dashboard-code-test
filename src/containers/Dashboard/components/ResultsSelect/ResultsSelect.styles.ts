@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { COLORS } from "../../../../styles/primitives";
 
+const { grey, white } = COLORS;
+
 export const ResultSelectWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -11,14 +13,13 @@ export const Select = styled.select`
   display: inline-block;
   padding: 0.5rem 1rem 0.5rem 1rem;
   margin: 0;
-  border-weight: 1px;
+  border-width: 1px;
   border-style: solid;
-  border-color: ${COLORS.grey.light};
+  border-color: ${grey.light};
   border-radius: 0.25rem;
-  background-color: #ffffff;
-  box-sizing: border-box;
+  background-color: ${white};
 
   :focus, :hover {
-    border-color: ${COLORS.grey.dark};
+    border-color: ${grey.dark};
   }
 `;

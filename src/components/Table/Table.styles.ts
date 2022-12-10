@@ -15,9 +15,18 @@ const cellStyles = css`
   border-bottom: 1px solid ${TABLE_BORDER_COLOR};
 `;
 
-export const TableHeadCell = styled.th`
+interface TableHeadCellProps {
+  width?: string;
+}
+
+export const TableHeadCell = styled.th<TableHeadCellProps>`
+  width: auto;
   font-weight: 600;
   ${cellStyles}
+
+  @media screen and (min-width: 500.01px) {
+    width: ${({width}) => width || "auto"};
+  }
 `;
 
 export const TableBodyCell = styled.td`
