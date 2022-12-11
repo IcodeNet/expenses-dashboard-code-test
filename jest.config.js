@@ -12,4 +12,7 @@ module.exports = {
       }
     ],
   },
+  moduleNameMapper: {
+    "\\.png$": "<rootDir>/src/test-utils/__mocks__/file.mock.ts",
+  },
 };

@@ -41,7 +41,7 @@ export const Dashboard = () => {
 
       {
         error ? 
-          <Alert >{error}</Alert> 
+          <Alert>{error}</Alert> 
           :
           <>
             <dl>

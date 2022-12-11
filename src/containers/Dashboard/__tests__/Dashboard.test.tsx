@@ -1,9 +1,10 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { mockSuccessfulGetRequest } from "../../../test-utils/msw/requestMockHelpers";
+import { mockFailedGetRequest, mockSuccessfulGetRequest } from "../../../test-utils/msw/requestMockHelpers";
 import { Dashboard } from "../Dashboard";
 import { MOCK_PROVIDER_DATA, MOCK_PROVIDER_DATA_CONDENSED } from "./data";
 import { server } from "../../../test-utils/msw/mswSetup";
+import { act } from "react-dom/test-utils";
 
 describe("Transactions dashboard", () => {
   it("should display loading text when transactions are fetched", async () => {
@@ -39,6 +40,8 @@ describe("Transactions dashboard", () => {
       expect(apiCallSpy).toHaveBeenCalledTimes(1);
     });
 
+    expect(screen.queryByTestId("skeleton-loader")).not.toBeInTheDocument();
+    
     const transactions = screen.getAllByRole("row");
 
     expect(transactions).toHaveLength(4);
@@ -100,5 +103,26 @@ describe("Transactions dashboard", () => {
     userEvent.selectOptions(resultsSelect, option);
 
     await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(expected));
+  });
+
+  it("displays an error message when provider cannot be fetched", async () => {
+    mockFailedGetRequest("*/v2/5c62e7c33000004a00019b05", {})
+
+    const apiCallSpy = jest.fn();
+    server.events.on("request:start", apiCallSpy);
+
+    render(<Dashboard />);
+
+    await waitFor(() => {
+      expect(apiCallSpy).toHaveBeenCalledTimes(1);
+    });
+
+    const alert = screen.getByRole("alert");
+
+    await act(async () => waitFor(() => expect(alert).toBeInTheDocument()));
+
+    expect(
+      within(alert).getByText(/your account information is unavailable right now. please try again later./i)
+    ).toBeInTheDocument();
   });
 });
