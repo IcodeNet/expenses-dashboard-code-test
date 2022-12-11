@@ -23,7 +23,7 @@ export const fetchProvider = async ({ setProviderData, setIsLoading, setError }:
       setError("You're account information is unavailable right now. Please try again later.");    
     }
   } catch (e) {
-    console.error(e);
+    setIsLoading(false);
     setError("We were unable to fetch your account. Please try again later.");
   }
 }

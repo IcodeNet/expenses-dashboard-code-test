@@ -19,6 +19,14 @@ module.exports = {
         use: 'ts-loader',
         exclude: /.yarn/
       },
+      {
+        test: /\.(png)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {

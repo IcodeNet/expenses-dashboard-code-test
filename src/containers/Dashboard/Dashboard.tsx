@@ -6,7 +6,7 @@ import { TransactionsTable } from './components';
 import type { ProviderDataResponse } from '../../api/types/transactions';
 import { ResultsSelect } from './components/ResultsSelect/ResultsSelect';
 import { TableWrapper } from './Dashboard.styles';
-import { Container } from '../../components';
+import { Alert, Container } from '../../components';
 
 export const Dashboard = () => {
   const [providerData, setProviderData] = useState<ProviderDataResponse | null>(null);
@@ -35,37 +35,42 @@ export const Dashboard = () => {
     setFilterCount(parseInt(value));
   }, []);
 
-  if (error) return <div>{error}</div>;
-
   return (
     <Container>
       <h1>My {providerData?.provider.title} Account</h1>
 
-      <dl>
-        <div>
-          <dt>Sort Code:</dt>
-          <dd>{provider?.sort_code}</dd>
-        </div>
-        <div>
-          <dt>Account Number:</dt>
-          <dd>{provider?.account_number}</dd>  
-        </div>
-        <div>
-          <dt>Current Balance:</dt>
-          <dd>{balance?.amount} {balance?.currency_iso}</dd>
-        </div>
-      </dl>
+      {
+        error ? 
+          <Alert >{error}</Alert> 
+          :
+          <>
+            <dl>
+              <div>
+                <dt>Sort Code:</dt>
+                <dd>{provider?.sort_code}</dd>
+              </div>
+              <div>
+                <dt>Account Number:</dt>
+                <dd>{provider?.account_number}</dd>  
+              </div>
+              <div>
+                <dt>Current Balance:</dt>
+                <dd>{balance?.amount} {balance?.currency_iso}</dd>
+              </div>
+            </dl>
 
-      <h2>Expenses</h2>
+            <h2>Expenses</h2>
 
-      <TableWrapper>
-        <TransactionsTable {...{
-          isLoading,
-          transactions: filteredTransactions
-        }} />
+            <TableWrapper>
+              <TransactionsTable {...{
+                isLoading,
+                transactions: filteredTransactions
+              }} />
 
-        <ResultsSelect onChange={handleResultsCount} selectedValue={filterCount} />
-      </TableWrapper>
+              <ResultsSelect onChange={handleResultsCount} selectedValue={filterCount} />
+            </TableWrapper>
+          </>
+      }
     </Container>
   );
 }

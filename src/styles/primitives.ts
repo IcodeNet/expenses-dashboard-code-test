@@ -3,7 +3,11 @@ export const COLORS = {
     light: "rgba(0, 0, 0, 0.12)",
     dark: "rgba(0, 0, 0, 0.6)"
   },
-  white: "#ffffff"
+  white: "#ffffff",
+  red: {
+    light: "#fdeded",
+    dark: "rgb(95, 33, 32)"
+  }
 }
 
 export const TYPOGRAPHY = {
