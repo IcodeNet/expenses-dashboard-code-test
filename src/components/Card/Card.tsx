@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 import { CardIcon, CardIconWrapper, CardWrapper, CardContent } from "./Card.styles";
 
 interface CardProps {
-  children: ReactElement[]
+  children: ReactElement[] | ReactElement;
   icon?: string;
 }
 

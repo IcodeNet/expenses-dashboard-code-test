@@ -84,7 +84,10 @@ Good luck!
 ## TODO
 
 - [ ] Complete UI styling
-- [ ] Date & currency formatting
-- [ ] Provider info UI elements
-- [ ] ?? User-selectable filters ??
+  - [x] Provider cards
+  - [ ] Provider card loading state
+- [ ] Formatting utilties
+  - [x] Currency formatting
+  - [ ] Date formatting
+- [ ] Sort ordering ??
 - [ ] Linting & formatting

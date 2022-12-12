@@ -21,6 +21,16 @@ export const CardWrapper = styled.div<CardWrapperProps>`
 
 export const CardContent = styled.div``;
 
+interface CardContentSkeletonWrapperProps {
+  flexDirection?: CSSProperties["flexDirection"]
+}
+
+export const CardContentSkeletonWrapper = styled.div<CardContentSkeletonWrapperProps>`
+  display: flex;
+  flex-direction: ${({ flexDirection }) => flexDirection || "column"};
+  gap: 0.75rem;
+`;
+
 export const CardHeading = styled.h2`
   font-size: 1.25rem;
   font-weight: 600;

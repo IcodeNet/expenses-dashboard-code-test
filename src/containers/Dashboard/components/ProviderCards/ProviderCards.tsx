@@ -4,6 +4,7 @@ import { Card, CardHeading, CardSubheading } from "../../../../components";
 import { ProviderBalance, ProviderInfo, ProviderTitleLower } from "../../../../api/types/transactions";
 import { formatCurrency } from "../../../../utilities";
 import { PROVIDER_LOGOS } from "../../../../constants/providerLogos";
+import { SkeletonCards } from "./SkeletonCards";
 
 interface ProviderCards {
   balance?: ProviderBalance;
@@ -11,11 +12,13 @@ interface ProviderCards {
   provider?: ProviderInfo
 }
 
-export const ProviderCards: FC<ProviderCards> = ({ provider, balance }) => {
+export const ProviderCards: FC<ProviderCards> = ({ balance, isLoading, provider }) => {
   const { 
     amount: balanceAmount,
     currency_iso: balanceCurrency
   } = balance || {};
+  const showCards = !isLoading && !!provider && !!balance;
+
   const balanceFormatted = 
     !!balanceAmount && 
     !!balanceCurrency && 
@@ -26,15 +29,21 @@ export const ProviderCards: FC<ProviderCards> = ({ provider, balance }) => {
 
   return (
     <FlexContainer gap="1rem" wrap="wrap">
-      <Card icon={providerLogo}>
-        <CardHeading as="span">{provider?.sort_code} | {provider?.account_number}</CardHeading>
-        <CardSubheading as="h3">Sort Code | Account Number</CardSubheading>
-      </Card>
+      {isLoading && <SkeletonCards />}
 
-      <Card>
-        <CardHeading as="span">{balanceFormatted}</CardHeading>
-        <CardSubheading as="h3">Current Balance</CardSubheading>
-      </Card>
+      {showCards && (
+        <>
+          <Card icon={providerLogo}>
+            <CardHeading as="span">{provider?.sort_code} | {provider?.account_number}</CardHeading>
+            <CardSubheading as="h3">Sort Code | Account Number</CardSubheading>
+          </Card>
+
+          <Card>
+            <CardHeading as="span">{balanceFormatted}</CardHeading>
+            <CardSubheading as="h3">Current Balance</CardSubheading>
+          </Card>
+        </>
+      )}
     </FlexContainer>
   );
 }
