@@ -1,12 +1,18 @@
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 import { COLORS } from "../../../../styles";
 
 const { grey, white } = COLORS;
 
-export const ResultSelectWrapper = styled.div`
+interface ResultsSelectWrapperProps {
+  ml: CSSProperties["marginLeft"];
+}
+
+export const ResultSelectWrapper = styled.div<ResultsSelectWrapperProps>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 1rem;
+  margin-left: auto;
 `;
 
 export const Select = styled.select`
