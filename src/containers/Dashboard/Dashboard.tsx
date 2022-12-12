@@ -3,10 +3,13 @@ import { fetchProvider } from '../../api/fetchProvider';
 import { DEFAULT_FILTER_COUNT } from './constants';
 import { filterExpenses } from './helpers';
 import { TransactionsTable } from './components';
-import type { ProviderDataResponse } from '../../api/types/transactions';
+import type { ProviderDataResponse, ProviderTitleLower } from '../../api/types/transactions';
 import { ResultsSelect } from './components/ResultsSelect/ResultsSelect';
 import { TableWrapper } from './Dashboard.styles';
-import { Alert, Container } from '../../components';
+import { Alert, Container, Card, CardHeading, CardSubheading } from '../../components';
+import { formatCurrency } from '../../utilities';
+import { FlexContainer } from '../../styles';
+import { PROVIDER_LOGOS } from '../../constants/providerLogos';
 
 export const Dashboard = () => {
   const [providerData, setProviderData] = useState<ProviderDataResponse | null>(null);
@@ -16,6 +19,18 @@ export const Dashboard = () => {
   const [error, setError] = useState("");
 
   const { balance, provider, transactions } = providerData || {};
+
+  const { 
+    amount: balanceAmount,
+    currency_iso: balanceCurrency
+  } = balance || {};
+  const balanceFormatted = 
+    !!balanceAmount && 
+    !!balanceCurrency && 
+    formatCurrency(balanceAmount, balanceCurrency);
+
+  const providerTitle = provider?.title.toLowerCase() as ProviderTitleLower || "";
+  const providerLogo = providerTitle && PROVIDER_LOGOS[providerTitle];
 
   useEffect(() => {
     fetchProvider({
@@ -44,7 +59,18 @@ export const Dashboard = () => {
           <Alert>{error}</Alert> 
           :
           <>
-            <dl>
+            <FlexContainer gap="1rem">
+              <Card>
+                <CardHeading>{balanceFormatted}</CardHeading>
+                <CardSubheading as="h3">Current Balance</CardSubheading>
+              </Card>
+
+              <Card icon={providerLogo}>
+                <CardHeading>{provider?.sort_code} / {provider?.account_number}</CardHeading>
+                <CardSubheading as="h3">Sort Code / Acc No.</CardSubheading>
+              </Card>
+            </FlexContainer>
+            {/* <dl>
               <div>
                 <dt>Sort Code:</dt>
                 <dd>{provider?.sort_code}</dd>
@@ -57,7 +83,7 @@ export const Dashboard = () => {
                 <dt>Current Balance:</dt>
                 <dd>{balance?.amount} {balance?.currency_iso}</dd>
               </div>
-            </dl>
+            </dl> */}
 
             <h2>Expenses</h2>
 

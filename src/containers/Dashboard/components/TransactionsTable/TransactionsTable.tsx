@@ -50,7 +50,7 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
         <TableRow key={id}>
           <TableBodyCell>{formattedDate}</TableBodyCell>
           <TableBodyCell>{description}</TableBodyCell>
-          <TableBodyCell>{formatCurrency(value, currency_iso)}</TableBodyCell>
+          <TableBodyCell>{formatCurrency(value, currency_iso, true)}</TableBodyCell>
         </TableRow>
         )
       })}
