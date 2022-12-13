@@ -65,35 +65,6 @@ Good luck!
 
 ---
 
-## Overview of requirements
-
-- [x] React SPA with bundling from scratch
-- [x] Data fetching
-  - [x] Use provided endpoint; http://www.mocky.io/v2/5c62e7c33000004a00019b05
-  - [x] Native fetching API's only
-  - [x] Filter to **10 smallest transactions**
-- [x] Display CSS skills; no frameworks/libraries. Styled components preferred.
-- [ ] Emphasis on performance. Optimise re-renders.
-- [x] Accessibility is key
-- [x] Keep it simple
-- [x] Bonus
-  - [x] Unit tests
-  - [x] StyledComponents
-  - [x] Loading & error states
-
-## TODO
-
-- [x] Complete UI styling
-  - [x] Provider cards
-  - [x] Provider card loading state
-- [x] Formatting utilties
-  - [x] Currency formatting
-  - [ ] Date formatting
-- [ ] ?? Linting & formatting
-- [ ] Add potential improvements to documentation
-- [ ] Add account info test
-- [ ] Add account info rationale
-
 ## Getting Started
 
 To run this application:
@@ -140,9 +111,20 @@ Components such as the `ResultsSelect` are memoized to prevent unnecessary re-re
 
 In general, callbackizing/memoizing is a useful technique to reduce compute resource required for re-renderings in React but should also be approached with careful consideration. Over-use can potentially be detrimental to performance of an application where its implementation isn't required and/or provides little to no enhancement. Ultimately, the output of such a technique is stored in memory which is a trade-off.
 
-### Testing
+### Testing
 
 Testing is implemented through the use of Jest and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). The latter is a particularly powerful and helpful library for testing, allowing this application to be tested in a way that closely reflects how I expect the end-user to use it. React Testing Library also provides a much cleaner and more developer friendly style of implementing tests minimising reference to low-level API's and siginificantly improving readibility of tests.
+
+Predominantly, I have implemented integration-style tests in `src/containers/Dashboard/__tests__/Dashboard.test.tsx` to avoid testing implementation details and more closely mirror the end-user experience. Additionally, I have added unit test where I feel these add value, particularly with respect to utility-type functions that are intended for more global/shared usage.
+
+### User Interface
+
+The UI for this application is intentionally kept simple and easy to read due to the nature of reading large amounts of data. Styled Components are used throughout with simple styles that create a slightly more appealing UI beyond native HTML styling.
+
+Two key areas exists:
+
+1. Expenses table which contains the 10 (default) smallest expenses. This was part of the base requirement.
+2. Additionally, an 'account info' card section is implemented to provide more contextual information that complements the transaction information. This was added beyond the requirements of this task.
 
 ### User Experience & Accessibility
 
@@ -151,6 +133,8 @@ Whilst the visual and functional content of this application remains simple, sem
 I opted for using a native HTML `table` for displaying the transactional data in order to leverage the native accessibility for highlighting data headings and values. Use of the native `table` was a trade-off against visual layout for smaller devices. On smaller devices, to accommodate wide rows, horizontal scrolling *might* be required and is enabled. Horizontal scrolling is implemented in such a way that is in accordance with [WCAG spec](https://www.w3.org/WAI/WCAG21/Understanding/reflow.html) which permits two-directional scrolling for data tables. Horizontal scrolling is also made accessible for assistive technologies, allowing for focus and scrolling via arrow keys.
 
 The task requirements alone require only the top 10 *smallest expenses* to be displayed. The API data in fact contains more than 10 expenses. To improve the user experience, the application defaults to displaying 10 smallest expenses but allows the user to select to view more if required.
+
+Additionally, given the API contract contained contextual information regarding the users account information and balance, I have opted to also display this information in cards in order to create a more dashboard-like experience.
 
 #### Loading & Error Handling
 
@@ -163,3 +147,11 @@ Skeleton-style loaders are implemented during fetching of the API data to clearl
 Error-handling is also implemented during data fetching and is displayed as an alert on screen if the API returns a bad status code, or the network fails.
 
 <img width="952" alt="Screenshot 2022-12-13 at 17 10 18" src="https://user-images.githubusercontent.com/33296316/207403913-b20b6724-1c53-4398-8e06-a101d3ba1492.png">
+
+### Potential Improvements
+
+If I were to iterate on this solution and implement improvements, I would consider the following points:
+
+* Abstracting fetch provider and related state into custom hook.
+* Adding user-selectable sorting (ascending/descending) to amount and/or date table headers.
+* Implement an E2E test via Cypress.

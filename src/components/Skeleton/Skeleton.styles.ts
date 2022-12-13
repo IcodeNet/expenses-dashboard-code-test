@@ -14,7 +14,7 @@ export const SkeletonRectangle = styled.div<SkeletonProps>`
   width: ${({ width }) => width || DEFAULT_SKELETON_WIDTH};
   height: ${({ height }) => height|| DEFAULT_SKELETON_HEIGHT};
   ${({ margin }) => margin && `margin: ${margin};`}
-  background: rgba(0, 0, 0, 0.11);
+  background-color: rgba(0, 0, 0, 0.10);
   animation: flash 1.5s ease-in-out 0.4s infinite;
   border-radius: 0.25rem;
 

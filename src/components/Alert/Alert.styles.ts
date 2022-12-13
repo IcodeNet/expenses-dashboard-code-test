@@ -30,4 +30,5 @@ export const AlertIcon = styled.img`
 
 export const AlertContentWrapper = styled.div`
   padding: 0.375rem;
+  line-height: 1.5;
 `;
