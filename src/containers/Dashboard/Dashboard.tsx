@@ -1,17 +1,20 @@
-import React, { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { type ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getProvider } from '../../api/queries';
 import { DASHBOARD_CONTENT, DEFAULT_FILTER_COUNT } from './constants';
 import { filterExpenses } from './helpers';
 import { TransactionsTable } from './components';
 import type { ProviderDataResponse } from '../../api/types/transactions';
 import { TableWrapper } from './Dashboard.styles';
-import { Alert, Container } from '../../components';
+import { Alert, Container, SkeletonRectangle } from '../../components';
 import { ProviderCards, ResultsSelect } from './components';
 
 const EXPENSES_HEADING_ID = "expenses-heading";
 
 const {
   getHeading,
+  accountInfo: {
+    label: accountInfoLabel
+  },
   expenses: {
     heading: expensesHeading
   }
@@ -50,13 +53,18 @@ export const Dashboard = () => {
 
   return (
     <Container>
-      <h1>{getHeading(providerData?.provider.title)}</h1>
+      {isLoadingProvider ? 
+        <SkeletonRectangle width="200px" height="44px" margin="1rem 0"/> 
+        :
+        <h1>{getHeading(providerData?.provider.title)}</h1>}
 
-      <ProviderCards {...{
-        balance,
-        isLoading: isLoadingProvider,
-        provider
-      }} />
+      <section aria-label={accountInfoLabel}>
+        <ProviderCards {...{
+          balance,
+          isLoading: isLoadingProvider,
+          provider
+        }} />
+      </section>
 
       {
         error ? 
