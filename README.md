@@ -74,20 +74,89 @@ Good luck!
   - [x] Filter to **10 smallest transactions**
 - [x] Display CSS skills; no frameworks/libraries. Styled components preferred.
 - [ ] Emphasis on performance. Optimise re-renders.
-- [ ] Accessibility is key
+- [x] Accessibility is key
 - [x] Keep it simple
-- [ ] Bonus
+- [x] Bonus
   - [x] Unit tests
   - [x] StyledComponents
-  - [ ] Loading & error states
+  - [x] Loading & error states
 
 ## TODO
 
-- [ ] Complete UI styling
+- [x] Complete UI styling
   - [x] Provider cards
-  - [ ] Provider card loading state
-- [ ] Formatting utilties
+  - [x] Provider card loading state
+- [x] Formatting utilties
   - [x] Currency formatting
   - [ ] Date formatting
-- [ ] Sort ordering ??
-- [ ] Linting & formatting
+- [ ] ?? Linting & formatting
+
+## Getting Started
+
+To run this application:
+
+1. Install dependencies via `yarn install`.
+2. Run the application via `yarn start-dev`.
+
+To test the application:
+
+1. Ensure dependencies are installed as above.
+2. Run unit test via `yarn test`.
+
+## Rationale
+
+In order to complete the requirements of this task, I chose for the foundations of this app to be built upon React and TypeScript. The application is bundled using webpack. This core combination of UI library, static type-checking for JavaScript and module bundler is widely adopted amongst the technology industry with each having strong backing and support. This lends itself well to production applications knowing that each of the core building blocks have excellent documentation and technical support, large-scale adoption/familiarity by current/prospective future engineers and a comprehensive ecosystem of associated and compatible third-party libraries, tools and packages that can enhance applications.
+
+Below, I shall further detail my rationale about various key topics of this application:
+
+### Data Handling & Formatting
+
+State management and data fetching for this application is intentionally kept clean, minimal and uncomplicated:
+
+* Data fetching
+  * Fetched via the native `fetch` API which requires zero additional config to call the provided endpoint.
+  * Backend response is fully-typed via `ProviderDataResponse` allowing for effective handling and implementation of this response.
+    * This minimises the likelihood of introducing unwanted errors due to improper handling of data.
+    * Also assists engineers unfamiliar with the backend contract and acts as documentation, increasing speed at which engineers can familiarise with code.
+  * Handles error scenarios for both API-related and network-level failures accordingly.
+* State management
+  * Uses React `useState` hook to store the API response as the single source of truth for all provider data.
+  * Only a single section of this application requires access to this state.
+  * State sharing is not required via context and/or global state management patterns and libraries.
+* Formatting
+  * API data remains untouched in `providerData` state.
+  * API contract contains a lot of data unrelated to expenses.
+    * `transactions` included unsorted income and expenses.
+  * Filtering and sorting of this data is computed and memoized in a separate variable, eliminating the need to alter the source of truth.
+
+### Performance
+
+This application was built with performance and unnecessary re-renders in mind. Where necessary, expensive computations such as `filteredTransactions` are callbackized to prevent using unnecessary resource to compute sorting and filtering logic. The benefits of such callbackizing/memoizing would become even more significant if the app were required to iterate on a significantly larger dataset such as hundreds/thousands of array items.
+
+Components such as the `ResultsSelect` are memoized to prevent unnecessary re-rendering. These components are static by nature and should be unaffected by changes in ancestor component re-renders.
+
+In general, callbackizing/memoizing is a useful technique to reduce compute resource required for re-renderings in React but should also be approached with careful consideration. Over-use can potentially be detrimental to performance of an application where its implementation isn't required and/or provides little to no enhancement. Ultimately, the output of such a technique is stored in memory which is a trade-off.
+
+### Testing
+
+Testing is implemented through the use of Jest and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). The latter is a particularly powerful and helpful library for testing, allowing this application to be tested in a way that closely reflects how I expect the end-user to use it. React Testing Library also provides a much cleaner and more developer friendly style of implementing tests minimising reference to low-level API's and siginificantly improving readibility of tests.
+
+### User Experience & Accessibility
+
+Whilst the visual and functional content of this application remains simple, semantic and accessible structure was paramount. Appropriate implementation of accessibility best-practices are implemented throughout.
+
+I opted for using a native HTML `table` for displaying the transactional data in order to leverage the native accessibility for highlighting data headings and values. Use of the native `table` was a trade-off against visual layout for smaller devices. On smaller devices, to accommodate wide rows, horizontal scrolling *might* be required and is enabled. Horizontal scrolling is implemented in such a way that is in accordance with [WCAG spec](https://www.w3.org/WAI/WCAG21/Understanding/reflow.html) which permits two-directional scrolling for data tables. Horizontal scrolling is also made accessible for assistive technologies, allowing for focus and scrolling via arrow keys.
+
+The task requirements alone require only the top 10 *smallest expenses* to be displayed. The API data in fact contains more than 10 expenses. To improve the user experience, the application defaults to displaying 10 smallest expenses but allows the user to select to view more if required.
+
+#### Loading & Error Handling
+
+Graceful degradation of the platform is key during notable events such as loading and error states, ensuring the user is contextually aware of the state of the application.
+
+Skeleton-style loaders are implemented during fetching of the API data to clearly indicate the application is in a transitionary state.
+
+<!-- TODO: Add screenshot here. -->
+
+Error-handling is also implemented during data fetching and is displayed as an alert on screen if the API returns a bad status code, or the network fails.
+
+<!-- TODO: Add screenshot here. -->
