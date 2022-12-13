@@ -7,16 +7,14 @@ interface SkeletonRowProps {
   columns: number;
 }
 
-export const SkeletonRow = ({ columns }: SkeletonRowProps) => {
-  return (
-    <TableRow>
-      {
-        [...Array(columns)].map((_, index) => (
-          <TableBodyCell key={index}>
-            <SkeletonRectangle aria-label={LOADING_LABEL} data-testid="skeleton-loader" />
-          </TableBodyCell>
-        ))
-      }
-    </TableRow>
-  )
-}
+export const SkeletonRow = ({ columns }: SkeletonRowProps) => (
+  <TableRow>
+    {
+      [...Array(columns)].map((_, index) => (
+        <TableBodyCell key={index}>
+          <SkeletonRectangle aria-label={LOADING_LABEL} data-testid="skeleton-loader" />
+        </TableBodyCell>
+      ))
+    }
+  </TableRow>
+)

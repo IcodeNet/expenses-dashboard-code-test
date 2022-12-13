@@ -43,7 +43,7 @@ export const Dashboard = () => {
   );
 
   const handleResultsCount = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
+    const { target: { value }} = e;
 
     setFilterCount(parseInt(value));
   }, []);
