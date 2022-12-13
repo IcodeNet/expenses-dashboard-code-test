@@ -90,6 +90,9 @@ Good luck!
   - [x] Currency formatting
   - [ ] Date formatting
 - [ ] ?? Linting & formatting
+- [ ] Add potential improvements to documentation
+- [ ] Add account info test
+- [ ] Add account info rationale
 
 ## Getting Started
 
