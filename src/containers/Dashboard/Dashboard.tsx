@@ -65,11 +65,10 @@ export const Dashboard = () => {
           <TableWrapper aria-labelledby={EXPENSES_HEADING_ID}>
             <h2 id={EXPENSES_HEADING_ID}>{expensesHeading}</h2>
 
-            <TransactionsTable {...{
-              labelledBy: EXPENSES_HEADING_ID,
-              isLoading: isLoadingProvider,
-              transactions: filteredTransactions
-            }} />
+            <TransactionsTable 
+              labelledBy={EXPENSES_HEADING_ID}
+              isLoading={isLoadingProvider}
+              transactions={filteredTransactions} />
 
             <ResultsSelect onChange={handleResultsCount} selectedValue={filterCount} />
           </TableWrapper>

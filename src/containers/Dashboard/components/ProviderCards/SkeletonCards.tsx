@@ -5,14 +5,8 @@ import {
   SkeletonRectangle
 } from "../../../../components";
 
-const cardValueSkeletonProps = {
-  width: "180px",
-};
-
-const cardHeadingSkeletonProps = {
-  width: "120px",
-  height: "20px"
-};
+const HeadingSkeleton = () => <SkeletonRectangle width="180px"/>;
+const ValueSkeleton = () => <SkeletonRectangle width="120px" height="20px"/>;
 
 export const SkeletonCards = () => (
   <>
@@ -21,16 +15,16 @@ export const SkeletonCards = () => (
         <SkeletonRectangle width="48px" height="48px" />
 
         <CardContentSkeletonWrapper>  
-          <SkeletonRectangle {...cardHeadingSkeletonProps}/>
-          <SkeletonRectangle {...cardValueSkeletonProps} />
+          <ValueSkeleton />
+          <HeadingSkeleton />
         </CardContentSkeletonWrapper>
       </CardContentSkeletonWrapper>
     </Card>
 
     <Card>
       <CardContentSkeletonWrapper>
-        <SkeletonRectangle {...cardHeadingSkeletonProps} />
-        <SkeletonRectangle {...cardValueSkeletonProps} />
+        <ValueSkeleton />
+        <HeadingSkeleton />
       </CardContentSkeletonWrapper>
     </Card>
   </>

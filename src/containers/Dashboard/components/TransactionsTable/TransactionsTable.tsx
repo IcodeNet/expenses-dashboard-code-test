@@ -1,5 +1,5 @@
 import type { CurrencyCodeIso, Transaction } from '../../../../api/types/transactions';
-import React, { type FC } from 'react'
+import React, { ReactElement, type FC } from 'react'
 import { 
   Table, 
   TableBody, 
@@ -20,15 +20,17 @@ interface TransactionsTableProps {
   transactions: Transaction[];
 }
 
-const smallHeadCellProps = {
-  width: "120px"
-}
-
 const { headings: {
   date: dateHeading,
   description: descriptionHeading,
   amount: amountHeading
 } } = EXPENSES_TABLE_CONTENT;
+
+interface SmallHeadCellProps {
+  children: ReactElement | string;
+}
+
+const SmallHeadCell: FC<SmallHeadCellProps> = ({ children }) => <TableHeadCell width="120px">{children}</TableHeadCell>;
 
 export const TransactionsTable: FC<TransactionsTableProps> = ({
   isLoading,
@@ -41,9 +43,9 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
       <Table aria-labelledby={labelledBy}>
         <TableHead>
           <TableRow>
-              <TableHeadCell {...{smallHeadCellProps}}>{dateHeading}</TableHeadCell>
+              <SmallHeadCell>{dateHeading}</SmallHeadCell>
               <TableHeadCell>{descriptionHeading}</TableHeadCell>
-              <TableHeadCell {...{smallHeadCellProps}}>{amountHeading}</TableHeadCell>
+              <SmallHeadCell>{amountHeading}</SmallHeadCell>
           </TableRow>
         </TableHead>
 

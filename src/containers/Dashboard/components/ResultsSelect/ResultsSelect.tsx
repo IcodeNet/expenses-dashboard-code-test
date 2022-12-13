@@ -16,13 +16,15 @@ const {
 } = RESULTS_SELECT_CONTENT;
 
 export const ResultsSelect: FC<ResultsSelectProps> = memo(({ ml, onChange, selectedValue }) => (
-  <ResultSelectWrapper {...{ ml }}>
+  <ResultSelectWrapper ml={ml}>
     <label htmlFor={resultsName}>{resultsLabel}</label>
-    <Select {...{ id: resultsName, name: resultsName, onChange, value: selectedValue }}>
-      {resultsOptions.map(({ value, label }) => {
-        const isSelected = value === selectedValue;
-        return <option key={value} value={label}>{label}</option>;
-      })}
+    <Select 
+      id={resultsName}
+      name={resultsName}
+      onChange={onChange}
+      value={selectedValue}>
+      {resultsOptions.map(
+        ({ value, label }) => (<option key={value} value={label}>{label}</option>))}
     </Select>
   </ResultSelectWrapper>
 ));
