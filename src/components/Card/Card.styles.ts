@@ -5,6 +5,7 @@ interface CardWrapperProps {
   flex?: boolean;
   flexDirection?: CSSProperties["flexDirection"];
 }
+
 export const CardWrapper = styled.div<CardWrapperProps>`
   ${({ flex }) => flex && `
     display: flex;

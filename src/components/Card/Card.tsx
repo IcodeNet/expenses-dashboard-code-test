@@ -4,19 +4,18 @@ import { CardIcon, CardIconWrapper, CardWrapper, CardContent } from "./Card.styl
 interface CardProps {
   children: ReactElement[] | ReactElement;
   icon?: string;
+  testId?: string;
 }
 
-export const Card: FC<CardProps> = ({ icon, children }) => {
-  return (
-    <CardWrapper flex>
-      {icon && (
-        <CardIconWrapper>
-          <CardIcon src={icon} alt=""/>
-        </CardIconWrapper>
-      )}
-      <CardContent>
-        {children}
-      </CardContent>
-    </CardWrapper>
-  );
-};
+export const Card: FC<CardProps> = ({ children, icon, testId }) => (
+  <CardWrapper flex data-testid={testId}>
+    {icon && (
+      <CardIconWrapper>
+        <CardIcon src={icon} alt=""/>
+      </CardIconWrapper>
+    )}
+    <CardContent>
+      {children}
+    </CardContent>
+  </CardWrapper>
+);

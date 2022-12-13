@@ -10,7 +10,7 @@ const ValueSkeleton = () => <SkeletonRectangle width="120px" height="20px"/>;
 
 export const SkeletonCards = () => (
   <>
-    <Card>
+    <Card testId="skeleton-card-credentials">
       <CardContentSkeletonWrapper flexDirection="row">
         <SkeletonRectangle width="48px" height="48px" />
 
@@ -21,7 +21,7 @@ export const SkeletonCards = () => (
       </CardContentSkeletonWrapper>
     </Card>
 
-    <Card>
+    <Card testId="skeleton-card-balance">
       <CardContentSkeletonWrapper>
         <ValueSkeleton />
         <HeadingSkeleton />
