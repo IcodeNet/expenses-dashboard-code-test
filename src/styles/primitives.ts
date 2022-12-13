@@ -1,5 +1,6 @@
 export const COLORS = {
   grey: {
+    extraLight: "#f7fafc",
     light: "rgba(0, 0, 0, 0.12)",
     mid: "#e0e0e0",
     dark: "rgba(0, 0, 0, 0.6)"

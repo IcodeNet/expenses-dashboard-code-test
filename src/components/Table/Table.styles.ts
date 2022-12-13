@@ -39,7 +39,7 @@ export const Table = styled.table`
   border: 1px solid ${TABLE_BORDER_COLOR};
   border-radius: 0.25rem;
   border-spacing: unset;
-  background-color: #ffffff;
+  background-color: ${COLORS.white};
   font-size: 0.875rem;
   text-align: left;
 

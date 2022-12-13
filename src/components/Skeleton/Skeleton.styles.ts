@@ -15,7 +15,7 @@ export const SkeletonRectangle = styled.div<SkeletonProps>`
   height: ${({ height }) => height|| DEFAULT_SKELETON_HEIGHT};
   ${({ margin }) => margin && `margin: ${margin};`}
   background: rgba(0, 0, 0, 0.11);
-  animation: pulse 1.5s ease-in-out 0.4s infinite;
+  animation: flash 1.5s ease-in-out 0.4s infinite;
   border-radius: 0.25rem;
 
   @keyframes flash {
@@ -24,7 +24,7 @@ export const SkeletonRectangle = styled.div<SkeletonProps>`
     }
 
     50% {
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     100% {

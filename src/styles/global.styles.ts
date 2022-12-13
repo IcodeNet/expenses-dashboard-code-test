@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { TYPOGRAPHY } from "./primitives";
+import { COLORS, TYPOGRAPHY } from "./primitives";
 
 export const GlobalStyles = createGlobalStyle`
   body {
@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
     padding: 2rem 0;
     margin: 0;
-    background-color: #f3f3f3;
+    background-color: ${COLORS.grey.extraLight};
     font-family: ${TYPOGRAPHY.base};
   }
 
