@@ -155,8 +155,8 @@ Graceful degradation of the platform is key during notable events such as loadin
 
 Skeleton-style loaders are implemented during fetching of the API data to clearly indicate the application is in a transitionary state.
 
-<!-- TODO: Add screenshot here. -->
+<img width="958" alt="Screenshot 2022-12-13 at 17 08 49" src="https://user-images.githubusercontent.com/33296316/207403861-c1a731b7-0357-442b-b2c4-9470318e6e10.png">
 
 Error-handling is also implemented during data fetching and is displayed as an alert on screen if the API returns a bad status code, or the network fails.
 
-<!-- TODO: Add screenshot here. -->
+<img width="952" alt="Screenshot 2022-12-13 at 17 10 18" src="https://user-images.githubusercontent.com/33296316/207403913-b20b6724-1c53-4398-8e06-a101d3ba1492.png">
