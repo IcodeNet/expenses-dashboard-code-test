@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { fetchProvider } from '../../api/fetchProvider';
-import { DEFAULT_FILTER_COUNT } from './constants';
+import { getProvider } from '../../api/queries';
+import { DASHBOARD_CONTENT, DEFAULT_FILTER_COUNT } from './constants';
 import { filterExpenses } from './helpers';
 import { TransactionsTable } from './components';
 import type { ProviderDataResponse } from '../../api/types/transactions';
@@ -9,6 +9,13 @@ import { Alert, Container } from '../../components';
 import { ProviderCards, ResultsSelect } from './components';
 
 const EXPENSES_HEADING_ID = "expenses-heading";
+
+const {
+  getHeading,
+  expenses: {
+    heading: expensesHeading
+  }
+} = DASHBOARD_CONTENT;
 
 export const Dashboard = () => {
   const [providerData, setProviderData] = useState<ProviderDataResponse | null>(null);
@@ -21,7 +28,7 @@ export const Dashboard = () => {
   const { balance, provider, transactions } = providerData || {};
 
   useEffect(() => {
-    fetchProvider({
+    getProvider({
       isAwaitingFetch: isAwaitingProvider,
       setProviderData,
       setIsLoading,
@@ -43,7 +50,7 @@ export const Dashboard = () => {
 
   return (
     <Container>
-      <h1>My {providerData?.provider.title} Account</h1>
+      <h1>{getHeading(providerData?.provider.title)}</h1>
 
       <ProviderCards {...{
         balance,
@@ -56,7 +63,7 @@ export const Dashboard = () => {
           <Alert>{error}</Alert> 
           :
           <TableWrapper aria-labelledby={EXPENSES_HEADING_ID}>
-            <h2 id={EXPENSES_HEADING_ID}>Expenses</h2>
+            <h2 id={EXPENSES_HEADING_ID}>{expensesHeading}</h2>
 
             <TransactionsTable {...{
               labelledBy: EXPENSES_HEADING_ID,

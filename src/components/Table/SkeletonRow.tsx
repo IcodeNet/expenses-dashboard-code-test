@@ -1,5 +1,6 @@
 import React from 'react'
 import { SkeletonRectangle } from '../../components/Skeleton/Skeleton.styles';
+import { LOADING_LABEL } from './constants';
 import { TableBodyCell, TableRow } from './Table.styles'
 
 interface SkeletonRowProps {
@@ -12,7 +13,7 @@ export const SkeletonRow = ({ columns }: SkeletonRowProps) => {
       {
         [...Array(columns)].map((_, index) => (
           <TableBodyCell key={index}>
-            <SkeletonRectangle aria-label="Loading content" data-testid="skeleton-loader" />
+            <SkeletonRectangle aria-label={LOADING_LABEL} data-testid="skeleton-loader" />
           </TableBodyCell>
         ))
       }

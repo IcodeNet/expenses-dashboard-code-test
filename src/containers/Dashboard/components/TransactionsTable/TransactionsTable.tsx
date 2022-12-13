@@ -11,6 +11,7 @@ import {
 } from '../../../../components';
 import { TableOverflow } from './TransactionsTable.styles';
 import { formatCurrency } from '../../../../utilities';
+import { EXPENSES_TABLE_CONTENT } from './constants';
 
 interface TransactionsTableProps {
   isLoading?: boolean;
@@ -23,6 +24,12 @@ const smallHeadCellProps = {
   width: "120px"
 }
 
+const { headings: {
+  date: dateHeading,
+  description: descriptionHeading,
+  amount: amountHeading
+} } = EXPENSES_TABLE_CONTENT;
+
 export const TransactionsTable: FC<TransactionsTableProps> = ({
   isLoading,
   labelledBy,
@@ -34,9 +41,9 @@ export const TransactionsTable: FC<TransactionsTableProps> = ({
       <Table aria-labelledby={labelledBy}>
         <TableHead>
           <TableRow>
-              <TableHeadCell {...{smallHeadCellProps}}>Date</TableHeadCell>
-              <TableHeadCell>Description</TableHeadCell>
-              <TableHeadCell {...{smallHeadCellProps}}>Amount</TableHeadCell>
+              <TableHeadCell {...{smallHeadCellProps}}>{dateHeading}</TableHeadCell>
+              <TableHeadCell>{descriptionHeading}</TableHeadCell>
+              <TableHeadCell {...{smallHeadCellProps}}>{amountHeading}</TableHeadCell>
           </TableRow>
         </TableHead>
 

@@ -1,0 +1,1 @@
+export const EXCLAMATION_ALT = "Exclamation mark";

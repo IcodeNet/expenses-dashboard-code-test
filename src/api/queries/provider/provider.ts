@@ -1,25 +1,32 @@
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
-import { ProviderDataResponse, Transaction } from "./types/transactions";
+import type { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { ENDPOINTS } from "../../endpoints";
+import type { ProviderDataResponse } from "../../types/transactions";
+import { PROVIDER_QUERY_CONTENT } from "./constants";
 
-interface FetchProviderArgs {
+interface GetProviderArgs {
   isAwaitingFetch: MutableRefObject<boolean>;
   setProviderData: Dispatch<SetStateAction<ProviderDataResponse | null>>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setError: Dispatch<SetStateAction<string>>;
 };
 
-export const fetchProvider = async ({
+const { error: {
+  api: apiError,
+  network: networkError
+} } = PROVIDER_QUERY_CONTENT;
+
+export const getProvider = async ({
   isAwaitingFetch,
   setProviderData,
   setIsLoading,
   setError
-}: FetchProviderArgs) => {
+}: GetProviderArgs) => {
   try {
     setError("");
     setIsLoading(true);
     isAwaitingFetch.current = false;
 
-    const data = await fetch("https://www.mocky.io/v2/5c62e7c33000004a00019b05");
+    const data = await fetch(ENDPOINTS.provider);
 
     if (data.ok) {
       const parsed = await data.json();
@@ -27,10 +34,10 @@ export const fetchProvider = async ({
       setIsLoading(false);
       setProviderData(parsed);
     } else {
-      setError("Your account information is unavailable right now. Please try again later.");    
+      setError(apiError);    
     }
   } catch (e) {
     setIsLoading(false);
-    setError("We were unable to fetch your account. Please try again later.");
+    setError(networkError);
   }
 }

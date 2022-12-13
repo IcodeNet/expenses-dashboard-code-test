@@ -22,7 +22,7 @@ export interface ProviderBalance {
   currency_iso: CurrencyCodeIso;
 }
 
-type ProviderTitle = "Monzo";
+export type ProviderTitle = "Monzo";
 export type ProviderTitleLower = Lowercase<ProviderTitle>;
 
 export interface ProviderInfo {
