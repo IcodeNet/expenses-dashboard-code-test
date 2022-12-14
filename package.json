@@ -6,6 +6,7 @@
   "main": "./src/index.tsx",
   "private": true,
   "scripts": {
+    "build": "yarn webpack",
     "start-dev": "yarn webpack-dev-server --mode development",
     "test": "jest"
   },
