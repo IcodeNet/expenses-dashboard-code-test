@@ -1,4 +1,4 @@
-import styled, { CSSProperties } from "styled-components";
+import styled, { type CSSProperties } from "styled-components";
 import { COLORS } from "../../styles";
 
 interface CardWrapperProps {

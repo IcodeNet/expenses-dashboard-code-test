@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Transaction } from "../../../../api/types";
+import type { Transaction } from "../../../../api/types";
 import { TableRow, TableBodyCell } from "../../../../components";
 import { formatCurrency } from "../../../../utilities";
 

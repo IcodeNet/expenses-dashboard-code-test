@@ -1,4 +1,4 @@
-import styled, { CSSProperties } from "styled-components";
+import styled, { type CSSProperties } from "styled-components";
 
 interface SkeletonProps {
   width?: CSSProperties["width"];

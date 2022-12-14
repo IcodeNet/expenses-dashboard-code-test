@@ -1,5 +1,5 @@
 import type { Transaction } from '../../../../api/types/transactions';
-import React, { ReactElement, type FC } from 'react'
+import React, { type ReactElement, type FC } from 'react'
 import { 
   Table, 
   TableBody, 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { type FC } from 'react'
 import { AlertContentWrapper, AlertIcon, AlertWrapper } from './Alert.styles';
 import alert from "../../static/alert.png";
 import { EXCLAMATION_ALT } from './constants';

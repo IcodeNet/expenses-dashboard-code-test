@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+import React, { type FC, type ReactElement } from "react";
 import { CardIcon, CardWrapper } from "./Card.styles";
 
 interface CardProps {

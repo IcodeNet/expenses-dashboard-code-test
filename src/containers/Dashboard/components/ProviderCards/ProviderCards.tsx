@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React, { type FC } from "react";
 import { FlexContainer } from "../../../../styles";
 import { Card, CardHeading, CardSubheading } from "../../../../components";
-import { ProviderBalance, ProviderInfo, ProviderTitleLower } from "../../../../api/types/transactions";
+import type { ProviderBalance, ProviderInfo, ProviderTitleLower } from "../../../../api/types/transactions";
 import { formatCurrency } from "../../../../utilities";
 import { PROVIDER_LOGOS } from "../../../../constants/providerLogos";
 import { SkeletonCards } from "./SkeletonCards";

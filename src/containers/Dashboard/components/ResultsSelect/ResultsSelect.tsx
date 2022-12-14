@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FC, memo } from 'react';
+import React, { type ChangeEvent, type FC, memo } from 'react';
 import { RESULTS_SELECT_CONTENT } from "./data";
 import { ResultSelectWrapper, Select } from './ResultsSelect.styles';
-import { CSSProperties } from 'styled-components';
+import { type CSSProperties } from 'styled-components';
 
 interface ResultsSelectProps {
   ml?: CSSProperties["marginLeft"];

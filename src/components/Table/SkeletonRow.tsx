@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { SkeletonRectangle } from '../../components/Skeleton/Skeleton.styles';
 import { LOADING_LABEL } from './constants';
 import { TableBodyCell, TableRow } from './Table.styles'
@@ -7,7 +7,7 @@ interface SkeletonRowProps {
   columns: number;
 }
 
-export const SkeletonRow = ({ columns }: SkeletonRowProps) => (
+export const SkeletonRow = memo(({ columns }: SkeletonRowProps) => (
   <TableRow>
     {
       [...Array(columns)].map((_, index) => (
@@ -17,4 +17,4 @@ export const SkeletonRow = ({ columns }: SkeletonRowProps) => (
       ))
     }
   </TableRow>
-)
+));
