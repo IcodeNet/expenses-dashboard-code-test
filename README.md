@@ -152,3 +152,4 @@ If I were to iterate on this solution and implement improvements, I would consid
 * Abstracting fetch provider and related state into a custom hook.
 * Adding user-selectable sorting (ascending/descending) to amount or date table headers.
 * Implement an E2E test via Cypress.
+* Implement ESLint to ensure consistent file formatting and conventions across app.
