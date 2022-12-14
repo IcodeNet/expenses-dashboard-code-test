@@ -67,15 +67,19 @@ Good luck!
 
 ## Getting Started
 
-To run this application:
+Install dependencies via `yarn install`.
 
-1. Install dependencies via `yarn install`.
-2. Run the application via `yarn start-dev`.
+To run this application in dev mode:
+
+1. Run the application via `yarn start-dev`.
+
+To build the production bundle:
+
+1. Build the application via `yarn build`.
 
 To test the application:
 
-1. Ensure dependencies are installed as above.
-2. Run unit test via `yarn test`.
+1. Run unit tests via `yarn test`.
 
 ## Rationale
 
