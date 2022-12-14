@@ -1,5 +1,5 @@
 import { FC, ReactElement } from "react";
-import { CardIcon, CardIconWrapper, CardWrapper, CardContent } from "./Card.styles";
+import { CardIcon, CardWrapper } from "./Card.styles";
 
 interface CardProps {
   children: ReactElement[] | ReactElement;
@@ -10,12 +10,13 @@ interface CardProps {
 export const Card: FC<CardProps> = ({ children, icon, testId }) => (
   <CardWrapper flex data-testid={testId}>
     {icon && (
-      <CardIconWrapper>
+      <div>
         <CardIcon src={icon} alt=""/>
-      </CardIconWrapper>
+      </div>
     )}
-    <CardContent>
+
+    <div>
       {children}
-    </CardContent>
+    </div>
   </CardWrapper>
 );

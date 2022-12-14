@@ -20,8 +20,6 @@ export const CardWrapper = styled.div<CardWrapperProps>`
   background-color: ${COLORS.white};
 `;
 
-export const CardContent = styled.div``;
-
 interface CardContentSkeletonWrapperProps {
   flexDirection?: CSSProperties["flexDirection"]
 }
@@ -44,8 +42,6 @@ export const CardSubheading = styled.h3`
   font-weight: normal;
   margin: 0;
 `;
-
-export const CardIconWrapper = styled.div``;
 
 export const CardIcon = styled.img`
   width: 48px;

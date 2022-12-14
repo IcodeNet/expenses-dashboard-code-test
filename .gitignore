@@ -15,15 +15,7 @@ logs/
 coverage
 
 # Package build dirs
-dist
+public
 
 # jest caches
 /.jest-cache
-
-# Yarn cache files (not using Zero-installs approach)
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions

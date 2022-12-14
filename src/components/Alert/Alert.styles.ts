@@ -21,8 +21,6 @@ export const AlertWrapper = styled.div<AlertWrapperProps>`
   color: ${({ type }) => ALERT_STYLES[type].color};
 `;
 
-export const AlertIconWrapper = styled.div``;
-
 export const AlertIcon = styled.img`
   width: 36px;
   height: 36px;
