@@ -1,4 +1,4 @@
-# Bud – Frontend Developer Exercise
+# Expenses Dashboard
 
 As a Frontend Developer, your task is to connect to an API, receive some transaction data and
 show it on a web page.
@@ -30,8 +30,7 @@ used in production with scalability in mind.
 use StyledComponents).
 - Make sure that your code doesn’t cause needless re-renders and uses performance best
 practices.
-- At Bud we care about accessibility. Make sure your code follows semantic HTML
-conventions and adds good accessibility where possible.
+- Make sure your code follows semantic HTML conventions and adds good accessibility where possible.
 - **Please don’t use Create React App or any other tools that remove the need for set
 up**; we’d like to see your understanding of module bundlers and build tools and how you
 set up a project. It’s ok to re-use code you’ve used in previous projects as long as it’s
